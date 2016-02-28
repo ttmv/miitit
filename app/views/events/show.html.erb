@@ -22,21 +22,18 @@
 </p>
 
 
-<% if current_user and not @event.attenders.include?current_user %>
+<% if current_user %>
   <p>
+  <% if @event.attenders.include?current_user %>
+    <%= form_for(@attendance, method: :delete) do |f| %>
+      <%= f.submit value:"leave the event" %>
+    <% end %>
+  <% else %>
     <%= form_for(@attendance) do |f| %>
       <%= f.hidden_field :event_id %>
       <%= f.submit value:"join" %>
     <% end %>
-  </p>
-<% end %>  
-
-<% if current_user and @event.attenders.include?current_user %>
-  <p>
-  juuh elikkäs?
-    <%= form_for(@attendance, method: :delete) do |f| %>
-      <%= f.submit value:"leave the event" %>
-    <% end %>
+  <% end %>  
   </p>
 <% end %>  
 
