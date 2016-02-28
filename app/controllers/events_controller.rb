@@ -10,8 +10,14 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    @attendance = Attendance.new
-    @attendance.event = @event
+    if current_user
+      if @event.attenders.include?current_user
+        @attendance = get_attendance
+      else
+        @attendance = Attendance.new
+        @attendance.event = @event
+      end
+    end
   end
 
   # GET /events/new
@@ -72,5 +78,9 @@ class EventsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
       params.require(:event).permit(:name, :time, :info)
+    end
+    
+    def get_attendance
+      @event.attendances.find_by(user_id:current_user.id)
     end
 end

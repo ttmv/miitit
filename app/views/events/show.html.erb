@@ -34,6 +34,9 @@
 <% if current_user and @event.attenders.include?current_user %>
   <p>
   juuh elikkäs?
+    <%= form_for(@attendance, method: :delete) do |f| %>
+      <%= f.submit value:"leave the event" %>
+    <% end %>
   </p>
 <% end %>  
 
