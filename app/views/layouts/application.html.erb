@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Eventsthing</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="navibar">
+    <%= link_to 'Events', events_path %>
+    <%= link_to 'Users', users_path %> 
+    ||
+    <% if current_user %>
+      <%= link_to current_user.username, users_path %>
+      <%= link_to 'Sign out', signout_path, method: :delete, data: { confirm: 'Log out?' } %>
+    <% else %>             
+      <%= link_to 'Sign in', signin_path %>
+      <%= link_to 'New user', signup_path %> 
+    <% end %>
+  </div>
+<%= yield %>
+
+</body>
+</html>

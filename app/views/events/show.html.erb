@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @event.name %></h1>
+
+<p>
+  <strong>Time:</strong>
+  <%= @event.time %>
+</p>
+
+<p>
+  <strong>Info:</strong>
+  <%= @event.info %>
+</p>
+
+<p>
+  <strong>Attenders:</strong>
+  <ul>
+  <% @event.attenders.each do | att | %>
+    <li><%= att.username %></li>
+  <% end %>
+  </ul>
+</p>
+
+
+<% if current_user and not @event.attenders.include?current_user %>
+  <p>
+    <%= form_for(@attendance) do |f| %>
+      <%= f.hidden_field :event_id %>
+      <%= f.submit value:"join" %>
+    <% end %>
+  </p>
+<% end %>  
+
+<% if current_user and @event.attenders.include?current_user %>
+  <p>
+  juuh elikkäs?
+  </p>
+<% end %>  
+
+<p>
+
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>
