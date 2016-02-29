@@ -4,11 +4,11 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by username: params[:username]
-    if not user.nil?
+    if user and user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect_to user
     else
-      redirect_to new_user_path
+      redirect_to :back, notice: "wrong username or password"
     end
   end
 
