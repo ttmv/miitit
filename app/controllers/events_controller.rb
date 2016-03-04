@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  #before_action :authenticate
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   # GET /events
@@ -82,5 +83,9 @@ class EventsController < ApplicationController
     
     def get_attendance
       @event.attendances.find_by(user_id:current_user.id)
+    end
+    
+    def authenticate
+      #todo
     end
 end

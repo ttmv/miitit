@@ -4,7 +4,7 @@ class AttendancesController < ApplicationController
   # GET /attendances
   # GET /attendances.json
   def index
-    @attendances = Attendance.all
+    #@attendances = Attendance.all
   end
 
   # GET /attendances/1
@@ -29,7 +29,7 @@ class AttendancesController < ApplicationController
     respond_to do |format|
       if @attendance.save
         current_user.attendances << @attendance
-        format.html { redirect_to @attendance.event, notice: 'Attendance was successfully created.' }
+        format.html { redirect_to @attendance.event, notice: "You registered to #{@attendance.event.name}." }
         format.json { render :show, status: :created, location: @attendance.event }
       else
         format.html { render :new }
@@ -55,9 +55,10 @@ class AttendancesController < ApplicationController
   # DELETE /attendances/1
   # DELETE /attendances/1.json
   def destroy
+    event_name = @attendance.event.name
     @attendance.destroy
     respond_to do |format|
-      format.html { redirect_to current_user, notice: 'Attendance was successfully destroyed.' }
+      format.html { redirect_to current_user, notice: "You are no longer registered to #{event_name}." }
       format.json { head :no_content }
     end
   end
