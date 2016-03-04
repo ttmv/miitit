@@ -1,4 +1,5 @@
 class AttendancesController < ApplicationController
+  before_action :check_if_signed_in, except: [:index, :show]
   before_action :set_attendance, only: [:show, :edit, :update, :destroy]
 
   # GET /attendances
@@ -72,5 +73,12 @@ class AttendancesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def attendance_params
       params.require(:attendance).permit(:event_id, :user_id)
+    end
+    
+    def check_if_signed_in
+      if current_user.nil?
+        session[:proceed_path] = event_path
+        redirect_to signin_path, notice: 'Sign in to proceed'
+      end
     end
 end

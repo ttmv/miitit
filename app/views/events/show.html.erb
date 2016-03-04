@@ -21,6 +21,16 @@
   </ul>
 </p>
 
+<p>
+  <strong>Admins:</strong>
+  <ul>
+  <% @event.admins.each do | a | %>
+    <li><%= a.username %></li>
+  <% end %>
+  </ul>
+</p>
+
+
 
 <% if current_user %>
   <p>

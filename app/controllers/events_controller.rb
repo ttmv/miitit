@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   before_action :check_if_signed_in, except: [:index, :show]
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :check_if_event_admin, only: [:edit, :update, :destroy]
 
   # GET /events
   # GET /events.json
@@ -34,7 +35,8 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
-    @event.attenders << current_user
+    #@event.attenders << current_user
+    @event.admins << current_user
     respond_to do |format|
       if @event.save
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
@@ -90,5 +92,11 @@ class EventsController < ApplicationController
         session[:proceed_path] = event_path
         redirect_to signin_path, notice: 'Sign in to proceed'
       end
+    end
+    
+    def check_if_event_admin
+      if current_user.nil? or not @event.admins.include?current_user
+        redirect_to :back, notice: 'Operation not permitted'
+      end  
     end
 end
