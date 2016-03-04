@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  #before_action :authenticate
+  before_action :check_if_signed_in, except: [:index, :show]
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   # GET /events
@@ -34,7 +34,7 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
-
+    @event.attenders << current_user
     respond_to do |format|
       if @event.save
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
@@ -85,7 +85,10 @@ class EventsController < ApplicationController
       @event.attendances.find_by(user_id:current_user.id)
     end
     
-    def authenticate
-      #todo
+    def check_if_signed_in
+      if current_user.nil?
+        session[:proceed_path] = event_path
+        redirect_to signin_path, notice: 'Sign in to proceed'
+      end
     end
 end
