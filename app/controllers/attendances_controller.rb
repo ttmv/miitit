@@ -56,12 +56,16 @@ class AttendancesController < ApplicationController
   # DELETE /attendances/1
   # DELETE /attendances/1.json
   def destroy
-    event_name = @attendance.event.name
-    @attendance.destroy
-    respond_to do |format|
-      format.html { redirect_to current_user, notice: "You are no longer registered to #{event_name}." }
-      format.json { head :no_content }
-    end
+    event = @attendance.event
+    if event.admins.include?current_user and event.admins.count==1 and event.attenders.count > 1
+      redirect_to :back, notice: "Destroy event or make someone else admin first"
+    else
+      @attendance.destroy
+      respond_to do |format|
+        format.html { redirect_to current_user, notice: "You are no longer registered to #{event.name}." }
+        format.json { head :no_content }
+      end
+    end  
   end
 
   private
