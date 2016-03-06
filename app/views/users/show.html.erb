@@ -1,10 +1,10 @@
 <p id="notice"><%= notice %></p>
 
 
-<strong><%= @user.username %></strong>
+<h1><%= @user.username %></h1>
 
 <p>
-  <strong>Events:</strong>
+  <h2>Events registered to:</h2>
   <ul>
     <% @user.events.each do | event | %>
       <li><%= link_to event.name, event %> <%= event.time %></li>
@@ -13,7 +13,7 @@
 </p>
 
 <p>
-  <strong>Admin:</strong>
+  <h2>Adminstrated events:</h2>
   <ul>
     <% @user.adminstrated_events.each do | event | %>
       <li><%= link_to event.name, event %> <%= event.time %></li>
@@ -21,14 +21,21 @@
   </ul>
 </p>
 
-<p>
-  <strong>Messages:</strong>
-  <ul>
-    <% @user.messages.each do | msg | %>
-      <li><%= link_to msg.msg, msg %> <%= link_to msg.event, msg.event %> <%= link_to 'remove', msg, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+  <h3>Messages sent to events:</h3>
+
+<table>
+  <tbody>
+    <% @user.messages.each do |msg| %>
+      <tr>
+        <td><%= msg.timestamp %></td>
+        <td><%= link_to msg.event, msg.event %></td>
+        <td><%= link_to msg.msg, msg %></td>
+        <td><%= link_to 'remove', msg, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
     <% end %>
-  </ul>
-</p>
+  </tbody>
+</table>
+
 
 
 <% if current_user %>
