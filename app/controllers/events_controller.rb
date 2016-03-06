@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
-  before_action :check_if_signed_in, except: [:index, :show]
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :check_if_signed_in, except: [:index, :show]
   before_action :check_if_event_admin, only: [:edit, :update, :destroy]
 
   # GET /events
@@ -92,7 +92,7 @@ class EventsController < ApplicationController
     
     def check_if_signed_in
       if current_user.nil?
-        session[:proceed_path] = event_path
+        session[:proceed_path] = event_path if @event
         redirect_to signin_path, notice: 'Sign in to proceed'
       end
     end
