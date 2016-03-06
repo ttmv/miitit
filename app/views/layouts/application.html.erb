@@ -12,7 +12,7 @@
     <%= link_to 'Users', users_path %> 
     ||
     <% if current_user %>
-      <%= link_to current_user.username, users_path %>
+      <%= link_to current_user.username, current_user %>
       <%= link_to 'Sign out', signout_path, method: :delete, data: { confirm: 'Log out?' } %>
     <% else %>             
       <%= link_to 'Sign in', signin_path %>

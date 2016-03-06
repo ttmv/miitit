@@ -57,7 +57,7 @@ class AttendancesController < ApplicationController
   # DELETE /attendances/1.json
   def destroy
     event = @attendance.event
-    if event.admins.include?current_user and event.admins.count==1 and event.attenders.count > 1
+    if event.admins.include?current_user and event.admins.count==1
       redirect_to :back, notice: "Destroy event or make someone else admin first"
     else
       @attendance.destroy
