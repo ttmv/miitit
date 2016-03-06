@@ -3,8 +3,11 @@
 <h1><%= @event.name %></h1>
 
 <p>
+  <strong>Date:</strong>
+  <%= @event.event_date %>
+<br>
   <strong>Time:</strong>
-  <%= @event.time %>
+  <%= @event.event_time %>
 </p>
 <% if current_user and @event.attenders.include?current_user %>
   <p>
@@ -36,6 +39,9 @@
   <table>
   <% @event.messages.each do | m | %>
     <tr>
+      <td><%= m.user.username %>:</td> 
+      <td><%= m.msg %></td>  
+      <td><%= m.timestamp %></td> 
       <td>
         <% if m.user == current_user %>
           <%= form_for(m, method: :delete) do |f| %>
@@ -43,10 +49,6 @@
           <% end %> 
         <% end %>
       </td>
-
-      <td><%= m.timestamp %></td> 
-      <td><%= m.user.username %>:</td> 
-      <td><%= m.msg %></td>  
     </tr>
   <% end %>
   </table>

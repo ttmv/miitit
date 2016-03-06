@@ -11,4 +11,13 @@ class Event < ActiveRecord::Base
   def to_s
     return "#{self.name}"
   end
+  
+  def event_date
+    return "#{self.time.day}.#{self.time.month}.#{self.time.year}"
+  end
+  
+  def event_time
+    return "#{self.time.hour}:#{self.time.min}"
+  end
+
 end
