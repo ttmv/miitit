@@ -10,6 +10,10 @@
   <%= @event.event_time %>
 </p>
 <% if current_user and @event.attenders.include?current_user %>
+  <br>
+    <strong>Place:</strong>
+    <%= @event.place %>
+  </p>
   <p>
     <strong>Info:</strong>
     <%= @event.info %>
