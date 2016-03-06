@@ -33,11 +33,23 @@
 <% if current_user and @event.attenders.include?current_user %>
   <p>
   <strong>Messages:</strong>
-  <ul>
+  <table>
   <% @event.messages.each do | m | %>
-    <li><%= m.timestamp %> <%= m.user.username %>: <%= m.msg %>  </li>
+    <tr>
+      <td>
+        <% if m.user == current_user %>
+          <%= form_for(m, method: :delete) do |f| %>
+            <%= f.submit value:"delete"%>
+          <% end %> 
+        <% end %>
+      </td>
+
+      <td><%= m.timestamp %></td> 
+      <td><%= m.user.username %>:</td> 
+      <td><%= m.msg %></td>  
+    </tr>
   <% end %>
-  </ul>
+  </table>
   <%= form_for(@message) do |f| %>
     
       <%= f.hidden_field :event_id %>
