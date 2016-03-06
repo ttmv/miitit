@@ -20,22 +20,22 @@
     <% end %>
   </ul>
 </p>
-
+<% if @user == current_user %>
   <h3>Messages sent to events:</h3>
 
-<table>
-  <tbody>
-    <% @user.messages.each do |msg| %>
-      <tr>
-        <td><%= msg.timestamp %></td>
-        <td><%= link_to msg.event, msg.event %></td>
-        <td><%= link_to msg.msg, msg %></td>
-        <td><%= link_to 'remove', msg, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+  <table>
+    <tbody>
+      <% @user.messages.each do |msg| %>
+        <tr>
+          <td><%= msg.timestamp %></td>
+          <td><%= link_to msg.event, msg.event %></td>
+          <td><%= link_to msg.msg, msg %></td>
+          <td><%= link_to 'remove', msg, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
 
 
 <% if current_user %>
