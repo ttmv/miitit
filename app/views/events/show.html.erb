@@ -30,6 +30,26 @@
   </ul>
 </p>
 
+<% if current_user and @event.attenders.include?current_user %>
+  <p>
+  <strong>Messages:</strong>
+  <ul>
+  <% @event.messages.each do | m | %>
+    <li><%= m.timestamp %> <%= m.user.username %>: <%= m.msg %>  </li>
+  <% end %>
+  </ul>
+  <%= form_for(@message) do |f| %>
+    
+      <%= f.hidden_field :event_id %>
+      <%= f.hidden_field :user_id %>
+      <%= f.label :msg %><br>
+      <%= f.text_area :msg %>
+      <%= f.hidden_field :timestamp %>
+      <%= f.submit value:"submit" %>
+
+  <% end %>  
+  </p>
+<% end %>  
 
 
 <% if current_user %>

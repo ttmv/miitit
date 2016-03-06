@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @message.user_id %>
+</p>
+
+<p>
+  <strong>Event:</strong>
+  <%= @message.event_id %>
+</p>
+
+<p>
+  <strong>Msg:</strong>
+  <%= @message.msg %>
+</p>
+
+<p>
+  <strong>Timestamp:</strong>
+  <%= @message.timestamp %>
+</p>
+
+<%= link_to 'Edit', edit_message_path(@message) %> |
+<%= link_to 'Back', messages_path %>

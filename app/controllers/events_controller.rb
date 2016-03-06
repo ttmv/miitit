@@ -15,6 +15,9 @@ class EventsController < ApplicationController
     if current_user
       if @event.attenders.include?current_user
         @attendance = get_attendance
+        @message = Message.new
+        @message.event = @event
+        @message.user = current_user
       else
         @attendance = Attendance.new
         @attendance.event = @event
