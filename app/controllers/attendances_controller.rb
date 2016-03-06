@@ -1,6 +1,8 @@
 class AttendancesController < ApplicationController
   before_action :check_if_signed_in, except: [:index, :show]
+  before_action :prevent_access, only: [:index, :show]
   before_action :set_attendance, only: [:show, :edit, :update, :destroy]
+
 
   # GET /attendances
   # GET /attendances.json
@@ -84,5 +86,9 @@ class AttendancesController < ApplicationController
         session[:proceed_path] = event_path
         redirect_to signin_path, notice: 'Sign in to proceed'
       end
+    end
+    
+    def prevent_access
+      redirect_to :root, notice: 'Operation not permitted'
     end
 end

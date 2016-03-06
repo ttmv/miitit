@@ -1,11 +1,13 @@
 class MessagesController < ApplicationController
   before_action :check_if_signed_in, except: [:index, :show]
-  before_action :set_message, only: [:show, :edit, :update, :destroy]
+  #before_action :set_message, only: [:show, :edit, :update, :destroy]
+  before_action :set_message, only: [:edit, :update, :destroy]
+  before_action :prevent_access, only: [:index, :show]
 
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message.all
+    #@messages = Message.all
   end
 
   # GET /messages/1
@@ -84,5 +86,9 @@ class MessagesController < ApplicationController
         #session[:proceed_path] = event_path
         redirect_to signin_path, notice: 'Sign in to proceed'
       end
+    end
+    
+    def prevent_access
+      redirect_to :root, notice: 'Operation not permitted'
     end
 end
