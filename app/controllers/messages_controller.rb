@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+  before_action :check_if_signed_in, except: [:index, :show]
   before_action :set_message, only: [:show, :edit, :update, :destroy]
 
   # GET /messages
@@ -26,6 +27,7 @@ class MessagesController < ApplicationController
   def create
     @message = Message.new(message_params)
     @message.timestamp = Time.current if @message.timestamp.nil?
+    @message.user = current_user if @message.user.nil?
     respond_to do |format|
       if @message.save
         format.html { redirect_to @message, notice: 'Message was successfully created.' }
@@ -54,10 +56,14 @@ class MessagesController < ApplicationController
   # DELETE /messages/1
   # DELETE /messages/1.json
   def destroy
-    @message.destroy
-    respond_to do |format|
-      format.html { redirect_to messages_url, notice: 'Message was successfully destroyed.' }
-      format.json { head :no_content }
+    if @message.user == current_user or @message.event.admins.include?current_user
+      @message.destroy
+      respond_to do |format|
+        format.html { redirect_to messages_url, notice: 'Message was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to :back, notice: 'You can not destroy that message'
     end
   end
 
@@ -70,5 +76,12 @@ class MessagesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
       params.require(:message).permit(:user_id, :event_id, :msg, :timestamp)
+    end
+    
+    def check_if_signed_in
+      if current_user.nil?
+        session[:proceed_path] = event_path
+        redirect_to signin_path, notice: 'Sign in to proceed'
+      end
     end
 end
