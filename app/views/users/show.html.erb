@@ -12,7 +12,28 @@
   </ul>
 </p>
 
+<p>
+  <strong>Admin:</strong>
+  <ul>
+    <% @user.adminstrated_events.each do | event | %>
+      <li><%= link_to event.name, event %> <%= event.time %></li>
+    <% end %>
+  </ul>
+</p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %> |
-<%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
+<p>
+  <strong>Messages:</strong>
+  <ul>
+    <% @user.messages.each do | msg | %>
+      <li><%= link_to msg.msg, msg %> <%= link_to msg.event, msg.event %> <%= link_to 'remove', msg, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+    <% end %>
+  </ul>
+</p>
+
+
+<% if current_user %>
+  <%= link_to 'Change password', edit_user_path(@user) %> |
+  <%= link_to 'Destroy account', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>  |
+<%= link_to 'Back', users_path %> 
+

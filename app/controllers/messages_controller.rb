@@ -30,7 +30,7 @@ class MessagesController < ApplicationController
     @message.user = current_user if @message.user.nil?
     respond_to do |format|
       if @message.save
-        format.html { redirect_to @message, notice: 'Message was successfully created.' }
+        format.html { redirect_to @message.event, notice: 'Message was successfully posted.' }
         format.json { render :show, status: :created, location: @message }
       else
         format.html { render :new }
@@ -57,9 +57,10 @@ class MessagesController < ApplicationController
   # DELETE /messages/1.json
   def destroy
     if @message.user == current_user or @message.event.admins.include?current_user
+      event = @message.event
       @message.destroy
       respond_to do |format|
-        format.html { redirect_to messages_url, notice: 'Message was successfully destroyed.' }
+        format.html { redirect_to event, notice: 'Message was successfully destroyed.' }
         format.json { head :no_content }
       end
     else
@@ -80,7 +81,7 @@ class MessagesController < ApplicationController
     
     def check_if_signed_in
       if current_user.nil?
-        session[:proceed_path] = event_path
+        #session[:proceed_path] = event_path
         redirect_to signin_path, notice: 'Sign in to proceed'
       end
     end

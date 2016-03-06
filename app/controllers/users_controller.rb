@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
+  before_action :check_if_signed_in, only: [:edit, :update, :destroy]
+  
   # GET /users
   # GET /users.json
   def index
@@ -41,7 +42,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
+      if user_params[:username].nil? and @user == current_user and @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -71,4 +72,12 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:username, :password, :password_confirmation)
     end
+    
+    def check_if_signed_in
+      if current_user.nil?
+        #session[:proceed_path] = event_path
+        redirect_to signin_path, notice: 'Sign in to proceed'
+      end
+    end
+    
 end

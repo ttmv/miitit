@@ -7,4 +7,8 @@ class User < ActiveRecord::Base
   
   has_many :admin_attendances, -> { where admin:true }, class_name: "Attendance"
   has_many :adminstrated_events, through: :admin_attendances, source: :event
+  
+  def to_s
+    return "#{self.username}"
+  end
 end

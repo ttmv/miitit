@@ -7,4 +7,8 @@ class Event < ActiveRecord::Base
   
   has_many :admin_attendances, -> { where admin:true }, class_name: "Attendance"
   has_many :admins, through: :admin_attendances, source: :user
+  
+  def to_s
+    return "#{self.name}"
+  end
 end

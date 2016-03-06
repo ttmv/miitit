@@ -6,31 +6,31 @@
   <strong>Time:</strong>
   <%= @event.time %>
 </p>
-
-<p>
-  <strong>Info:</strong>
-  <%= @event.info %>
-</p>
-
-<p>
-  <strong>Attenders:</strong>
-  <ul>
-  <% @event.attenders.each do | att | %>
-    <li><%= att.username %></li>
-  <% end %>
-  </ul>
-</p>
-
-<p>
-  <strong>Admins:</strong>
-  <ul>
-  <% @event.admins.each do | a | %>
-    <li><%= a.username %></li>
-  <% end %>
-  </ul>
-</p>
-
 <% if current_user and @event.attenders.include?current_user %>
+  <p>
+    <strong>Info:</strong>
+    <%= @event.info %>
+  </p>
+
+  <p>
+    <strong>Attenders:</strong>
+    <ul>
+    <% @event.attenders.each do | att | %>
+      <li><%= att.username %></li>
+    <% end %>
+    </ul>
+  </p>
+
+  <p>
+    <strong>Admins:</strong>
+    <ul>
+    <% @event.admins.each do | a | %>
+      <li><%= a.username %></li>
+    <% end %>
+    </ul>
+  </p>
+
+
   <p>
   <strong>Messages:</strong>
   <table>
@@ -81,7 +81,8 @@
 
 <p>
 
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
-<%= link_to 'Delete event', event_path, method: :delete, data: { confirm: 'Are you sure?' } %> 
+<%= link_to 'Back', events_path %> 
+<% if current_user and @event.admins.include?current_user %>
+  <%= link_to 'Edit', edit_event_path(@event) %> |
+  <%= link_to 'Delete event', event_path, method: :delete, data: { confirm: 'Are you sure?' } %> 
+<% end %>  
