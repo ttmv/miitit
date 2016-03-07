@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :check_if_signed_in, only: [:show, :edit, :update, :destroy]
+  before_action :check_identity, only: [:show, :edit, :update, :destroy]
   
   # GET /users
   # GET /users.json
@@ -56,11 +57,15 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     if @user == current_user
-      session[:user_id] = nil
-      @user.destroy
-      respond_to do |format|
-        format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-        format.json { head :no_content }
+      if @user.only_admin
+        redirect_to @user, notice: 'Destroy your adminstrated events or share admin rights first'
+      else
+        session[:user_id] = nil
+        @user.destroy
+        respond_to do |format|
+          format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+          format.json { head :no_content }
+        end
       end
     else
       redirect_to :root, notice: 'Operation not permitted'
@@ -85,4 +90,9 @@ class UsersController < ApplicationController
       end
     end
     
+    def check_identity
+      unless current_user and current_user == @user
+        redirect_to :root, notice: 'access denied'
+      end
+    end    
 end

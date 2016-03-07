@@ -95,14 +95,13 @@
   <% end %>  
   </p>
 <% end %>  
+<% if current_user and @event.admins.include?current_user %>
+  Admin: <%= link_to 'Edit event', edit_event_path(@event) %> |
+  <%= link_to 'Delete event', event_path, method: :delete, data: { confirm: 'Are you sure?' } %> 
+<% end %>  
 
-<p>
 </div>
 </div>
 <%= link_to 'Back', events_path %> 
-<% if current_user and @event.admins.include?current_user %>
-  <%= link_to 'Edit', edit_event_path(@event) %> |
-  <%= link_to 'Delete event', event_path, method: :delete, data: { confirm: 'Are you sure?' } %> 
-<% end %>  
 
 

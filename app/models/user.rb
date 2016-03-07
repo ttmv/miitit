@@ -11,4 +11,8 @@ class User < ActiveRecord::Base
   def to_s
     return "#{self.username}"
   end
+  
+  def only_admin
+    self.adminstrated_events.each{|e| e.admins.count == 1 }.count > 0 
+  end
 end
