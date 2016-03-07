@@ -1,3 +1,4 @@
+<div class="container">
 <%= form_for(@user) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
@@ -10,6 +11,7 @@
       </ul>
     </div>
   <% end %>
+
   <% if @user.new_record? %>
     <div class="field">
       <%= f.label :username %><br>
@@ -33,3 +35,4 @@
     <%= f.submit %>
   </div>
 <% end %>
+</div>

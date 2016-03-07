@@ -3,6 +3,7 @@
 
 <h1><%= @user.username %></h1>
 
+<div>
 <p>
   <h2>Events registered to:</h2>
   <ul>
@@ -29,14 +30,14 @@
         <tr>
           <td><%= msg.timestamp %></td>
           <td><%= link_to msg.event, msg.event %></td>
-          <td><%= link_to msg.msg, msg %></td>
-          <td><%= link_to 'remove', msg, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= msg.msg %></td>
+          <td><span class="rmv"><%= link_to 'destroy message', msg, method: :delete, data: { confirm: 'Are you sure?' } %></span></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 <% end %>
-
+</div>
 
 <% if current_user %>
   <%= link_to 'Change password', edit_user_path(@user) %> |
