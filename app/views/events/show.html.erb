@@ -1,45 +1,52 @@
 <p id="notice"><%= notice %></p>
 
 <h1><%= @event.name %></h1>
-<div class="infobox">
-<p>
-  <strong>Date:</strong>
-  <%= @event.event_date %>
-<br>
-  <strong>Time:</strong>
-  <%= @event.event_time %>
-</p>
-<% if current_user and @event.attenders.include?current_user %>
-  <br>
-    <strong>Place:</strong>
-    <%= @event.place %>
-  </p>
-  <p>
-    <strong>Info:</strong>
-    <%= @event.info %>
-  </p>
-</div>
-  <p>
-    <strong>Attenders:</strong>
-    <ul>
-    <% @event.attenders.each do | att | %>
-      <li><%= att.username %></li>
-    <% end %>
-    </ul>
-  </p>
+<div id="eventbasics" class="container">
+  <div class="infobox">
+    <p>
+      <strong>Date:</strong>
+      <%= @event.event_date %>
+      <br>
+      <strong>Time:</strong>
+      <%= @event.event_time %>
+    </p>
+  </div>
+  <div class="infobox">
+    <% if current_user and @event.attenders.include?current_user %>
+    <p>
+      <strong>Place:</strong>
+      <%= @event.place %>
+    </p>
+    <p>
+      <strong>Info:</strong>
+      <%= @event.info %>
+    </p>
+  </div>
 
-  <p>
-    <strong>Admins:</strong>
-    <ul>
-    <% @event.admins.each do | a | %>
-      <li><%= a.username %></li>
-    <% end %>
-    </ul>
-  </p>
 
-<div class="divbox">
-  <p>
-  <strong>Messages:</strong>
+  <div class="attbox">
+    <p>
+      <strong>Attenders:</strong>
+      <ul>
+      <% @event.attenders.each do | att | %>
+        <li><%= att.username %></li>
+      <% end %>
+      </ul>
+    </p>
+
+    <p>
+      <strong>Admins:</strong>
+      <ul>
+      <% @event.admins.each do | a | %>
+        <li><%= a.username %></li>
+      <% end %>
+      </ul>
+    </p>
+  </div>
+
+  <div class="divbox">
+    <p>
+    <strong>Messages:</strong>
 
 
   <table>
@@ -50,7 +57,7 @@
       <td><%= m.timestamp %></td> 
       <td>
         <% if m.user == current_user %>
-          <%= link_to 'X', m, method: :delete, data: {confirm: 'remove message?'}, class:'rmv' %> 
+          <b class="rmv"><%= link_to 'X', m, method: :delete, data: {confirm: 'remove message?'} %></b> 
           <!---<%= form_for(m, method: :delete) do |f| %>
             <%= f.submit value:"delete"%>
           <% end %>--> 
@@ -79,6 +86,7 @@
     <%= form_for(@attendance, method: :delete) do |f| %>
       <%= f.submit value:"leave the event" %>
     <% end %>
+
   <% else %>
     <%= form_for(@attendance) do |f| %>
       <%= f.hidden_field :event_id %>
@@ -89,6 +97,7 @@
 <% end %>  
 
 <p>
+</div>
 </div>
 <%= link_to 'Back', events_path %> 
 <% if current_user and @event.admins.include?current_user %>

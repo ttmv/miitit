@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  */
+
 .navibar {
   color: #C0CDCD;
   background-color:#C0CDCD;
@@ -20,36 +21,102 @@
   border-radius: 3px;
 }
 
+#.navibar a:link {
+#    color: #FF0000;
+#}
+
+#.navibar a:visited {
+#  color: #FF0000;
+#}
+
+h1, h2, h3 {
+  #color: #505F6F;
+  color:#404F5F;
+}
+
 body {
   background-color: #A0ADAD;
-  color: #505F6F;
+  #color: #505F6F;
+  color:#404F5F;
+}
+
+div {
+  #background-color:#404F5F;
+  background-color:#C0CDCD;
+  #color:#F8F87F; 
 }
 
 .rmv {
-  background-color:#909D9D;
+  background-color:#404F5F;
+  #background-color:#909D9D;
   color:#C0CDCD;
 }
 
-.divbox {
-  background-color:#C0CDCD;
-  padding: 5px;
+.rmv a:link {
+  color:#F8F87F;
+  text-decoration: none;
+}
+
+.rmv a:visited {
+  color:#F8F87F;
+}
+
+.rmv a:hover {
+  color:#404F5F; 
+  background-color:#F8F87F;
+}
+
+
+.container {
+  padding: 10px;
   width: 80%;
+  border-radius: 3px;
+  position:relative;
+}
+
+.divbox {
+#  background-color:#C0CDCD;
+  padding: 5px;
+  width: 60%;
   border-radius: 3px;
 }
 
-.infobox {
-  background-color:#C0CDCD;
+.attbox {
   padding: 5px;
-  width: 40%;
+  width: 30%;
+  border-radius: 3px;
+  position:absolute;
+  margin:10px;
+  right:0;
+  top:0;
+  background-color:#404F5F;
+  color:#F8F87F; 
+
+}
+.yellowbtn {
+  background-color:#404F5F;
+  color:#F8F87F; 
+}
+
+.infobox {
+  padding: 5px;
+  width: 55%;
+  background-color:#404F5F;
+  color:#F8F87F; 
+
   border-radius: 3px;
 }
+
+a:link {
+    #color: #505F6F;
+    color:#404F5F;
+}
+
 a:visited { 
-  color: #505F6F;
+  #color: #505F6F;
+  color:#404F5F;
 }
  
-a:link {
-    color: #505F6F;
-}
 
 a:hover {
     color: #C0CDCD;
