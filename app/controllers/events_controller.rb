@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-  before_action :check_if_signed_in, except: [:index, :show]
+  before_action :check_if_signed_in
   before_action :check_if_event_admin, only: [:edit, :update, :destroy]
 
   # GET /events
@@ -78,7 +78,10 @@ class EventsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
-      @event = Event.find(params[:id])
+      @event = Event.find_by(id:params[:id])
+      if @event.nil? 
+        redirect_to :root, notice: 'No bonus'
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -8,7 +8,7 @@
   <h2>Events registered to:</h2>
   <ul>
     <% @user.events.each do | event | %>
-      <li><%= link_to event.name, event %> <%= event.time %></li>
+      <li><strong><%= link_to event.name, event %></strong> <%= event.time %></li>
     <% end %>
   </ul>
 </p>
@@ -17,7 +17,7 @@
   <h2>Adminstrated events:</h2>
   <ul>
     <% @user.adminstrated_events.each do | event | %>
-      <li><%= link_to event.name, event %> <%= event.time %></li>
+      <li><strong><%= link_to event.name, event %></strong> <%= event.time %></li>
     <% end %>
   </ul>
 </p>

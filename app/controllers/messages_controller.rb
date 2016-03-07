@@ -32,7 +32,7 @@ class MessagesController < ApplicationController
     @message.user = current_user if @message.user.nil?
     respond_to do |format|
       if @message.save
-        format.html { redirect_to @message.event, notice: 'Message was successfully posted.' }
+        format.html { redirect_to @message.event }
         format.json { render :show, status: :created, location: @message }
       else
         format.html { render :new }
