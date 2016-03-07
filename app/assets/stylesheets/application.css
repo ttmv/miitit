@@ -15,25 +15,13 @@
  */
 
 .navibar {
-  #color: #C0CDCD;
-  #background-color:#C0CDCD;
   background-color:#D0DEDE;
   padding: 10px;
   margin:10px;
   width:80%;
-  #border-radius: 3px;
 }
 
-#.navibar a:link {
-#    color: #FF0000;
-#}
-
-#.navibar a:visited {
-#  color: #FF0000;
-#}
-
 h1, h2, h3 {
-  #color: #505F6F;
   color:#404F5F;
   padding:5px;
   margin:5px;
@@ -55,23 +43,17 @@ input[type=button], input[type=submit], input[type=reset] {
     background-color: #404F5F;
     border: none;
     color:#F8F87F;
-    #color: #909D9D;
-    #padding: 16px 32px;
     text-decoration: none;
     margin: 4px 2px;
     cursor: pointer;
 }
 
 div {
-  #background-color:#404F5F;
   background-color:#D0DEDE;
-  #color:#F8F87F;
-  #padding:10px; 
 }
 
 .rmv {
   background-color:#404F5F;
-  #background-color:#909D9D;
   color:#C0CDCD;
 }
 
@@ -99,7 +81,6 @@ div {
 }
 
 .divbox {
-#  background-color:#C0CDCD;
   padding: 5px;
   width: 60%;
   border-radius: 3px;
@@ -113,10 +94,8 @@ div {
   margin:10px;
   right:0;
   top:0;
-  #background-color:#404F5F;
-  #color:#F8F87F; 
-
 }
+
 .yellowbtn {
   background-color:#404F5F;
   color:#F8F87F; 
@@ -125,14 +104,10 @@ div {
 .infobox {
   padding: 5px;
   width: 55%;
-  #background-color:#404F5F;
-  #color:#F8F87F; 
-
   border-radius: 3px;
 }
 
 a:link {
-    #color: #505F6F;
     color:#404F5F;
 }
 
