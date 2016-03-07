@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1><%= @event.name %></h1>
-
+<div class="infobox">
 <p>
   <strong>Date:</strong>
   <%= @event.event_date %>
@@ -18,7 +18,7 @@
     <strong>Info:</strong>
     <%= @event.info %>
   </p>
-
+</div>
   <p>
     <strong>Attenders:</strong>
     <ul>
@@ -37,9 +37,11 @@
     </ul>
   </p>
 
-
+<div class="divbox">
   <p>
   <strong>Messages:</strong>
+
+
   <table>
   <% @event.messages.each do | m | %>
     <tr>
@@ -48,9 +50,10 @@
       <td><%= m.timestamp %></td> 
       <td>
         <% if m.user == current_user %>
-          <%= form_for(m, method: :delete) do |f| %>
+          <%= link_to 'X', m, method: :delete, data: {confirm: 'remove message?'}, class:'rmv' %> 
+          <!---<%= form_for(m, method: :delete) do |f| %>
             <%= f.submit value:"delete"%>
-          <% end %> 
+          <% end %>--> 
         <% end %>
       </td>
     </tr>
@@ -86,9 +89,11 @@
 <% end %>  
 
 <p>
-
+</div>
 <%= link_to 'Back', events_path %> 
 <% if current_user and @event.admins.include?current_user %>
   <%= link_to 'Edit', edit_event_path(@event) %> |
   <%= link_to 'Delete event', event_path, method: :delete, data: { confirm: 'Are you sure?' } %> 
 <% end %>  
+
+

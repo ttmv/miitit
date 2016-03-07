@@ -13,3 +13,49 @@
  *= require_tree .
  *= require_self
  */
+.navibar {
+  color: #C0CDCD;
+  background-color:#C0CDCD;
+  padding: 10px;
+  border-radius: 3px;
+}
+
+body {
+  background-color: #A0ADAD;
+  color: #505F6F;
+}
+
+.rmv {
+  background-color:#909D9D;
+  color:#C0CDCD;
+}
+
+.divbox {
+  background-color:#C0CDCD;
+  padding: 5px;
+  width: 80%;
+  border-radius: 3px;
+}
+
+.infobox {
+  background-color:#C0CDCD;
+  padding: 5px;
+  width: 40%;
+  border-radius: 3px;
+}
+a:visited { 
+  color: #505F6F;
+}
+ 
+a:link {
+    color: #505F6F;
+}
+
+a:hover {
+    color: #C0CDCD;
+    background-color: #505F6F;
+}
+
+a:active {
+    color: #0070A0;
+}
