@@ -13,11 +13,14 @@ class Event < ActiveRecord::Base
   end
   
   def event_date
-    return "#{self.time.day}.#{self.time.month}.#{self.time.year}"
+    return self.time.strftime("%d.%m.%Y")
   end
   
   def event_time
-    return "#{self.time.hour}:#{self.time.min}"
+    return self.time.strftime("%H:%M")
   end
 
+  def date_and_time
+    return self.time.strftime("%d.%m.%Y %H:%M")
+  end
 end

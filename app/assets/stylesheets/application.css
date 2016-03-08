@@ -107,6 +107,10 @@ div {
   border-radius: 3px;
 }
 
+.userevents {
+  padding: 5px;
+}
+
 a:link {
     color:#404F5F;
 }

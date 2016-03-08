@@ -4,4 +4,8 @@ class Message < ActiveRecord::Base
   
   belongs_to :user
   belongs_to :event
+  
+  def time
+    return self.timestamp.strftime("%d.%m.%Y %H:%M")
+  end
 end

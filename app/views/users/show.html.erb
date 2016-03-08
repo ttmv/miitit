@@ -3,42 +3,78 @@
 
 <h1><%= @user.username %></h1>
 
-<div>
-<p>
+<div class="container">
   <h2>Events registered to:</h2>
-  <ul>
-    <% @user.events.each do | event | %>
-      <li><strong><%= link_to event.name, event %></strong> <%= event.time %></li>
-    <% end %>
-  </ul>
-</p>
-
-<p>
-  <h2>Adminstrated events:</h2>
-  <ul>
-    <% @user.adminstrated_events.each do | event | %>
-      <li><strong><%= link_to event.name, event %></strong> <%= event.time %></li>
-    <% end %>
-  </ul>
-</p>
-<% if @user == current_user %>
-  <h3>Messages sent to events:</h3>
-
+  
+  <div class="userevents">
+  
   <table>
+    <thead>
+    <tr>
+      <td></td>
+      <td></td>
+    </tr>
+    </thead>
     <tbody>
-      <% @user.messages.each do |msg| %>
+      <% @user.events.each do | event | %>
         <tr>
-          <td><%= msg.timestamp %></td>
-          <td><%= link_to msg.event, msg.event %></td>
-          <td><%= msg.msg %></td>
-          <td><span class="rmv"><%= link_to 'destroy message', msg, method: :delete, data: { confirm: 'Are you sure?' } %></span></td>
+          <td><strong><%= link_to event.name, event %></strong></td>
+          <td><%= event.date_and_time %> </td>
         </tr>
       <% end %>
     </tbody>
   </table>
-<% end %>
-</div>
+  </div>
 
+  <h2>Adminstrated events:</h2>
+  
+  <div class="userevents">
+  
+  <table>
+    <thead>
+    <tr>
+      <td></td>
+      <td></td>
+    </tr>
+    </thead>
+    <tbody>
+      <% @user.adminstrated_events.each do | event | %>
+        <tr>
+          <td><strong><%= link_to event.name, event %></strong></td>
+          <td><%= event.date_and_time %> </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+
+<div class="userevents">
+<% if @user == current_user %>
+  <h2>Messages posted to events:</h2>
+
+  <table>
+    <thead>
+    <tr>
+      <td><strong>Event</strong></td>
+      <td><strong>Message</strong></td>
+      <td><strong>Time</strong></td>
+      <td></td>
+    </tr>
+    </thead>
+    <tbody>
+      <% @user.messages.each do |msg| %>
+        <tr>
+          <td><%= link_to msg.event, msg.event %></td>
+          <td><%= msg.msg %></td>
+          <td><%= msg.time %></td>
+          <td><span class="rmv"><%= link_to 'destroy', msg, method: :delete, data: { confirm: 'Are you sure? Message will be deleted from event' } %></span></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>  
+  <% end %>
+</div>
 <% if current_user %>
   <%= link_to 'Change password', edit_user_path(@user) %> |
   <%= link_to 'Destroy account', @user, method: :delete, data: { confirm: 'Are you sure?' } %>

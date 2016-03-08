@@ -54,7 +54,7 @@
     <tr>
       <td><%= m.user.username %>:</td> 
       <td><%= m.msg %></td>  
-      <td><%= m.timestamp %></td> 
+      <td><%= m.time %></td> 
       <td>
         <% if m.user == current_user %>
           <b class="rmv"><%= link_to 'X', m, method: :delete, data: {confirm: 'remove message?'} %></b> 
