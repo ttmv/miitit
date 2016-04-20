@@ -3,10 +3,16 @@
 <h1>Hello</h1>
 
 <div class="container">
-  <p>
-    <span class="rmv"><%= link_to 'Sign in', signin_path %></span> or 
-    <span class="rmv"><%= link_to 'create account', new_user_path %></span>
-  </p>
+  <% if current_user %>
+    <p><span class="rmv"><%= link_to 'Profile', current_user %></span></p>
+    <p><span class="rmv"><%= link_to 'Create new event', new_event_path %></span></p>
+  <% else %> 
+    <p>
+      <span class="rmv"><%= link_to 'Sign in', signin_path %></span> or 
+      <span class="rmv"><%= link_to 'create account', new_user_path %></span>
+    </p>
+  <% end %> 
+
 </div>
 
 <br>
