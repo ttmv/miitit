@@ -12,16 +12,14 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    if current_user
-      if @event.attenders.include?current_user
-        @attendance = get_attendance
-        @message = Message.new
-        @message.event = @event
-        @message.user = current_user
-      else
-        @attendance = Attendance.new
-        @attendance.event = @event
-      end
+    if @event.attenders.include?current_user
+      @attendance = get_attendance
+      @message = Message.new
+      @message.event = @event
+      @message.user = current_user
+    else
+      @attendance = Attendance.new
+      @attendance.event = @event
     end
   end
 

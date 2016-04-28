@@ -1,6 +1,6 @@
 class Message < ActiveRecord::Base
   validates :user_id, presence: true
-  validates :event_id, presence: true #but event does not need to exist yet... #TODO: fix
+  validates :event_id, presence: true 
   
   belongs_to :user
   belongs_to :event
