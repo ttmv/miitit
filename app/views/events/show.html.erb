@@ -102,7 +102,7 @@
 
 <% else %>
   <div id="eventpassword" class="container">
-    <%= form_tag("/eventpass/#{@event.id}", method: "post") do %>
+    <%= form_tag("/events/#{@event.id}/pw", method: "post") do %>
       <%= label_tag(:password, "Event password:") %>
       <%= password_field_tag(:password) %>
       <%= submit_tag("Submit") %>

@@ -10,9 +10,9 @@ Rails.application.routes.draw do
   
   
   # event password:
-  get 'eventpw/:id', to: 'events#manage_password', as: 'manage_pw'
-  delete 'eventpw/:id', to: 'events#unset_password', as: 'delete_pw'
-  post 'eventpass/:id', to: 'events#read_password'
+  get 'events/:id/managepw', to: 'events#manage_password', as: 'manage_pw'
+  delete 'events/:id/deletepw', to: 'events#unset_password', as: 'delete_pw'
+  post 'events/:id/pw', to: 'events#read_password'
   
   resource :session, only: [:new, :create, :destroy]
   # The priority is based upon order of creation: first created -> highest priority.

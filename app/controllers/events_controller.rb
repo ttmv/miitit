@@ -88,9 +88,8 @@ class EventsController < ApplicationController
   end
 
   def read_password
-    #raise
     session["pass_for_#{params[:id]}"] = params[:password]
-    #raise
+
     redirect_to event_path(params[:id])
   end
 
