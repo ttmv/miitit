@@ -14,13 +14,11 @@ class EventsController < ApplicationController
   def show
     if @event.attenders.include?current_user
       @can_be_shown = true
-      @attendance = get_attendance
-      @message = Message.new
-      @message.event = @event
-      @message.user = current_user
+      set_attendance
+      set_message
     else
-      @can_be_shown = @event.password == session["pass_for_#{params[:id]}"] or @event.password.nil?
-       session["pass_for_#{params[:id]}"] = nil if session["pass_for_#{params[:id]}"]
+      @can_be_shown = @event.password == session["pass_for_#{params[:id]}"] 
+      session["pass_for_#{params[:id]}"] = nil if session["pass_for_#{params[:id]}"]
       @attendance = Attendance.new
       @attendance.event = @event
     end
@@ -110,8 +108,14 @@ class EventsController < ApplicationController
       params.require(:event).permit(:name, :time, :place, :info, :password)
     end
     
-    def get_attendance
-      @event.attendances.find_by(user_id:current_user.id)
+    def set_attendance
+      @attendance = @event.attendances.find_by(user_id:current_user.id)
+    end
+    
+    def set_message
+      @message = Message.new
+      @message.event = @event
+      @message.user = current_user   
     end
     
     def check_if_signed_in
