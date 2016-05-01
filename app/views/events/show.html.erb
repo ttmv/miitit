@@ -1,8 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <h1><%= @event.name %></h1>
-<div id="eventbasics" class="container">
-  <div class="infobox">
+
+<div class="container">
+  <div id="eventbasics" class="infobox">
     <p>
       <strong>Date:</strong>
       <%= @event.event_date %>
@@ -11,97 +12,90 @@
       <%= @event.event_time %>
     </p>
   </div>
-  <div class="infobox">
-    <% if current_user and @event.attenders.include?current_user %>
-    <p>
-      <strong>Place:</strong>
-      <%= @event.place %>
-    </p>
-    <p>
-      <strong>Info:</strong>
-      <%= @event.info %>
-    </p>
-  </div>
 
-
-  <div class="attbox">
-    <p>
-      <strong>Joined:</strong>
-      <ul>
-      <% @event.attenders.each do | att | %>
-        <li><%= att.username %></li>
-      <% end %>
-      </ul>
-    </p>
-
-    <p>
-      <strong>Admins:</strong>
-      <ul>
-      <% @event.admins.each do | a | %>
-        <li><%= a.username %></li>
-      <% end %>
-      </ul>
-    </p>
-  </div>
-
-  <div class="divbox">
-    <p>
-    <strong>Messages:</strong>
-
-
-  <table>
-  <% @event.messages.each do | m | %>
-    <tr>
-      <td><%= m.user.username %>:</td> 
-      <td><%= m.msg %></td>  
-      <td><%= m.time %></td> 
-      <td>
-        <% if m.user == current_user %>
-          <b class="rmv"><%= link_to 'X', m, method: :delete, data: {confirm: 'remove message?'} %></b> 
-          <!---<%= form_for(m, method: :delete) do |f| %>
-            <%= f.submit value:"delete"%>
-          <% end %>--> 
-        <% end %>
-      </td>
-    </tr>
-  <% end %>
-  </table>
-  <%= form_for(@message) do |f| %>
-    
-      <%= f.hidden_field :event_id %>
-      <%= f.hidden_field :user_id %>
-      <!---<%= f.label :msg %><br>-->
-      <%= f.text_area :msg %>
-      <%= f.hidden_field :timestamp %>
-      <%= f.submit value:"submit" %>
-
-  <% end %>  
-  </p>
-<% end %>  
-
-
-<% if current_user %>
-  <p>
   <% if @event.attenders.include?current_user %>
-    <%= form_for(@attendance, method: :delete) do |f| %>
-      <%= f.submit value:"leave the event" %>
-    <% end %>
+    <div id="eventinfo" class="infobox">
+      <p>
+        <strong>Place:</strong>
+        <%= @event.place %>
+      </p>
+      <p>
+        <strong>Info:</strong>
+        <%= @event.info %>
+      </p>
+    </div>
 
+    <div id="joined" class="attbox">
+      <p>
+        <strong>Joined:</strong>
+        <ul>
+        <% @event.attenders.each do | att | %>
+          <li><%= att.username %></li>
+        <% end %>
+        </ul>
+      </p>
+
+      <p>
+        <strong>Admins:</strong>
+        <ul>
+        <% @event.admins.each do | a | %>
+          <li><%= a.username %></li>
+        <% end %>
+        </ul>
+      </p>
+    </div>
+
+    <div id="messages" class="divbox">
+      <strong>Messages:</strong>
+
+      <table>
+        <% @event.messages.each do | m | %>
+          <tr>
+            <td><%= m.user.username %>:</td> 
+            <td><%= m.msg %></td>  
+            <td><%= m.time %></td> 
+            <td>
+              <% if m.user == current_user %>
+                <b class="rmv"><%= link_to 'X', m, method: :delete, data: {confirm: 'remove message?'} %></b> 
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+
+      <%= form_for(@message) do |f| %>
+        <%= f.hidden_field :event_id %>
+        <%= f.hidden_field :user_id %>
+        <%= f.text_area :msg %>
+        <%= f.hidden_field :timestamp %>
+        <%= f.submit value:"submit" %>
+      <% end %>  
+    </div>
+  
+    <div>
+      <%= form_for(@attendance, method: :delete) do |f| %>
+        <%= f.submit value:"leave the event" %>
+      <% end %>
+    </div>
+
+
+    <% if @event.admins.include?current_user %>
+      <div id="admin">
+        Admin: <%= link_to 'Edit event', edit_event_path(@event) %> |
+        <%= link_to 'Manage event password', manage_pw_path(@event) %> |
+        <%= link_to 'Delete event', event_path, method: :delete, data: { confirm: 'Are you sure?' } %> 
+      </div>
+    <% end %>
+    
   <% else %>
-    <%= form_for(@attendance) do |f| %>
-      <%= f.hidden_field :event_id %>
-      <%= f.submit value:"join" %>
-    <% end %>
+    <div>
+      <%= form_for(@attendance) do |f| %>
+        <%= f.hidden_field :event_id %>
+        <%= f.submit value:"join" %>
+      <% end %>
+    </div>
   <% end %>  
-  </p>
-<% end %>  
-<% if current_user and @event.admins.include?current_user %>
-  Admin: <%= link_to 'Edit event', edit_event_path(@event) %> |
-  <%= link_to 'Manage event password', manage_pw_path(@event) %> |
-  <%= link_to 'Delete event', event_path, method: :delete, data: { confirm: 'Are you sure?' } %> 
-<% end %>  
 
-</div>
 </div>
 <%= link_to 'Back', events_path %> 
 
