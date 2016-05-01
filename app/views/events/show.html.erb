@@ -2,6 +2,8 @@
 
 <h1><%= @event.name %></h1>
 
+<% if @can_be_shown %>
+
 <div class="container">
   <div id="eventbasics" class="infobox">
     <p>
@@ -97,6 +99,18 @@
   <% end %>  
 
 </div>
+
+<% else %>
+  <div id="eventpassword" class="container">
+    <%= form_tag("/eventpass/#{@event.id}", method: "post") do %>
+      <%= label_tag(:password, "Event password:") %>
+      <%= password_field_tag(:password) %>
+      <%= submit_tag("Submit") %>
+    <% end %>
+  </div>
+<% end %>
+
+
 <%= link_to 'Back', events_path %> 
 
 

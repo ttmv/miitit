@@ -13,11 +13,14 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     if @event.attenders.include?current_user
+      @can_be_shown = true
       @attendance = get_attendance
       @message = Message.new
       @message.event = @event
       @message.user = current_user
     else
+      @can_be_shown = @event.password == session["pass_for_#{params[:id]}"] or @event.password.nil?
+       session["pass_for_#{params[:id]}"] = nil if session["pass_for_#{params[:id]}"]
       @attendance = Attendance.new
       @attendance.event = @event
     end
@@ -86,6 +89,12 @@ class EventsController < ApplicationController
     end
   end
 
+  def read_password
+    #raise
+    session["pass_for_#{params[:id]}"] = params[:password]
+    #raise
+    redirect_to event_path(params[:id])
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
