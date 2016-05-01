@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy, :manage_password]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :manage_password, :unset_password]
   before_action :check_if_signed_in
-  before_action :check_if_event_admin, only: [:edit, :update, :destroy]
+  before_action :check_if_event_admin, only: [:edit, :update, :destroy, :unset_password]
 
   # GET /events
   # GET /events.json
@@ -75,8 +75,15 @@ class EventsController < ApplicationController
   def manage_password    
   end
   
-  def set_password
- 
+  def unset_password
+    @event.password = nil
+    respond_to do |format|
+      if @event.save
+        format.html { redirect_to @event, notice: 'Event password deleted.' }
+      else
+        format.html { redirect_to @event, notice: 'Error deleting event password.' }
+      end
+    end
   end
 
 
