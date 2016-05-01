@@ -7,7 +7,10 @@ Rails.application.routes.draw do
   get 'signup', to: 'users#new'
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
-
+  
+  # event password:
+  get 'eventpw/:id', to: 'events#manage_password', as: 'manage_pw'
+  #delete 'eventpw/:id', to: 'events#unset_password', as: 'delete_pw'
   
   resource :session, only: [:new, :create, :destroy]
   # The priority is based upon order of creation: first created -> highest priority.

@@ -97,6 +97,7 @@
 <% end %>  
 <% if current_user and @event.admins.include?current_user %>
   Admin: <%= link_to 'Edit event', edit_event_path(@event) %> |
+  <%= link_to 'Manage event password', manage_pw_path(@event) %> |
   <%= link_to 'Delete event', event_path, method: :delete, data: { confirm: 'Are you sure?' } %> 
 <% end %>  
 

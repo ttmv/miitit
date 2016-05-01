@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :manage_password]
   before_action :check_if_signed_in
   before_action :check_if_event_admin, only: [:edit, :update, :destroy]
 
@@ -72,6 +72,14 @@ class EventsController < ApplicationController
     end
   end
 
+  def manage_password    
+  end
+  
+  def set_password
+ 
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
@@ -83,7 +91,7 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :time, :place, :info)
+      params.require(:event).permit(:name, :time, :place, :info, :password)
     end
     
     def get_attendance
