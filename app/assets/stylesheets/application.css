@@ -95,6 +95,12 @@ input[type=button], input[type=submit], input[type=reset] {
   position:relative;
 }
 
+.infobox {
+  padding: 5px;
+  width: 55%;
+  border-radius: 3px;
+}
+
 .divbox {
   padding: 5px;
   width: 60%;
@@ -112,7 +118,7 @@ input[type=button], input[type=submit], input[type=reset] {
 }
 
 @media only screen and (max-width: 500px) {
-  [class*="container"] {
+  .container {
     width: 100%;
   }
 
@@ -120,17 +126,17 @@ input[type=button], input[type=submit], input[type=reset] {
     width: 100%;
   }
   
-  [class*="infobox"] {
+  .infobox {
     position: relative;
     width: 90%;
   }
 
-  [class*="divbox"] {
+  .divbox {
     position: relative;
     width: 90%;
   }
 
-  [class*="attbox"] {
+  .attbox {
     position: relative;
     width: 70%;
   }
@@ -145,11 +151,6 @@ input[type=button], input[type=submit], input[type=reset] {
   color:#F8F87F; 
 }
 
-.infobox {
-  padding: 5px;
-  width: 55%;
-  border-radius: 3px;
-}
 
 .userevents {
   padding: 5px;
