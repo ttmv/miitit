@@ -111,6 +111,49 @@ input[type=button], input[type=submit], input[type=reset] {
   top:0;
 }
 
+@media only screen and (max-width: 500px) {
+  /*.divbox {
+    padding: 5px;
+    width: 100%;
+    margin: auto;
+    border-radius: 3px;
+  }
+
+  .attbox {
+    padding: 5px;
+    width: 100%;
+    border-radius: 3px;
+    margin:auto;
+  }
+
+  .infobox {
+    padding: 5px;
+    width: 100%;
+    margin: auto;
+    border-radius: 3px;
+  }
+*/
+  
+  [class*="infobox"] {
+    position: relative;
+    width: 100%;
+  }
+
+  [class*="divbox"] {
+    position: relative;
+    width: 100%;
+  }
+
+  [class*="attbox"] {
+    position: relative;
+    width: 100%;
+  }
+
+}
+
+
+
+
 .yellowbtn {
   background-color:#404F5F;
   color:#F8F87F; 

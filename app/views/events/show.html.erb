@@ -27,26 +27,6 @@
       </p>
     </div>
 
-    <div id="joined" class="attbox">
-      <p>
-        <strong>Joined:</strong>
-        <ul>
-        <% @event.attenders.each do | att | %>
-          <li><%= att.username %></li>
-        <% end %>
-        </ul>
-      </p>
-
-      <p>
-        <strong>Admins:</strong>
-        <ul>
-        <% @event.admins.each do | a | %>
-          <li><%= a.username %></li>
-        <% end %>
-        </ul>
-      </p>
-    </div>
-
     <div id="messages" class="divbox">
       <strong>Messages:</strong>
 
@@ -73,6 +53,27 @@
         <%= f.submit value:"submit" %>
       <% end %>  
     </div>
+
+    <div id="joined" class="attbox">
+      <p>
+        <strong>Joined:</strong>
+        <ul>
+        <% @event.attenders.each do | att | %>
+          <li><%= att.username %></li>
+        <% end %>
+        </ul>
+      </p>
+
+      <p>
+        <strong>Admins:</strong>
+        <ul>
+        <% @event.admins.each do | a | %>
+          <li><%= a.username %></li>
+        <% end %>
+        </ul>
+      </p>
+    </div>
+
   
     <div>
       <%= form_for(@attendance, method: :delete) do |f| %>
