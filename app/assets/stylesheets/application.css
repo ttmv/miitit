@@ -138,9 +138,13 @@ input[type=button], input[type=submit], input[type=reset] {
 
   .attbox {
     position: relative;
-    width: 70%;
+    width: 90%;
+    margin: 0px;
   }
 
+  li {
+    display: inline;
+  }
 }
 
 
