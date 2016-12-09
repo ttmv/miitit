@@ -142,8 +142,15 @@ input[type=button], input[type=submit], input[type=reset] {
     margin: 0px;
   }
 
+  ul {
+    //background: #ff0000;  
+  }
+
   li {
+    //background: #ffffff;
     display: inline;
+    padding: 4px;
+    //border: solid; 
   }
 }
 

@@ -60,12 +60,16 @@
         <strong>Joined:</strong>
         <ul>
         <% @event.attenders.each do | att | %>
-          <li><%= att.username %></li>
+          <li><%= att.username %>
+            <% if @event.admins.include?att %>
+               (admin) 
+            <% end %>
+          </li>
         <% end %>
         </ul>
       </p>
 
-      <p>
+     <!-- <p>
         <strong>Admins:</strong>
         <ul>
         <% @event.admins.each do | a | %>
@@ -73,6 +77,7 @@
         <% end %>
         </ul>
       </p>
+     --> 
     </div>
 
 
