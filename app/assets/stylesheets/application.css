@@ -62,10 +62,6 @@ input[type=button], input[type=submit], input[type=reset] {
     cursor: pointer;
 }
 
-//div {
-//  background-color:#D0DEDE;
-//}
-
 .rmv {
   background-color:#404F5F;
   color:#C0CDCD;
@@ -142,19 +138,11 @@ input[type=button], input[type=submit], input[type=reset] {
     margin: 0px;
   }
 
-  ul {
-    //background: #ff0000;  
-  }
-
   li {
-    //background: #ffffff;
     display: inline;
     padding: 4px;
-    //border: solid; 
   }
 }
-
-
 
 
 .yellowbtn {
