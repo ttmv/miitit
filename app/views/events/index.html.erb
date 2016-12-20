@@ -2,6 +2,7 @@
 
 <h1>Events</h1>
 
+<div class="container">
 <table>
   <thead>
     <tr>
@@ -14,7 +15,7 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
-        <td><b><%= event.name %></b></td>
+        <td><b><%= link_to event.name, event %></b></td>
         <td><%= event.time %></td>
       </tr>
     <% end %>
@@ -22,6 +23,7 @@
 </table>
 
 <br>
+</div>
 
 <div class="naviend">
   <%= link_to 'New Event', new_event_path %>
