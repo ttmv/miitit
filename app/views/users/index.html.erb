@@ -1,14 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Users</h1>
-
-<ul>
-  <% @users.each do |user| %>
-    <li><%= user.username %></li>
+<div class="container">
+  <% if current_user %>
+    Moi
+  <% else %>
+    <%= link_to 'Create new account', new_user_path %>
   <% end %>
-</ul>
-
-<br>
-<div class="naviend">
-  <%= link_to 'New User', new_user_path %>
-</div>
+</div> 

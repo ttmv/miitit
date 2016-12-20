@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :check_if_signed_in, only: [:index, :show, :edit, :update, :destroy]
+  before_action :check_if_signed_in, only: [:show, :edit, :update, :destroy]
   before_action :check_identity, only: [:show, :edit, :update, :destroy]
   
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    #@users = User.all
   end
 
   # GET /users/1
